@@ -1,5 +1,5 @@
 
-# 🔥FireQ: Fast INT4-FP8 Kernel and RoPE-aware Quantization for LLM Inference Accelerattion
+# 🔥FireQ: Fast INT4-FP8 Kernel and RoPE-aware Quantization for LLM Inference Acceleration
 
 We propose FireQ, a co-designed PTQ framework and an INT4-FP8 matrix multiplication kernel that accelerates LLM inference across all linear layers. Specifically, FireQ quantizes linear layer weights and key-values to INT4, and activations and queries to FP8, significantly enhancing throughput. Additionally, we introduce a three-stage pipelining for the prefill phase, which modifies the FlashAttention-3 kernel, effectively reducing time-to-first-token in
 the prefill phase. 
