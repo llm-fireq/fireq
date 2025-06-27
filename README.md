@@ -13,7 +13,7 @@ by the FP8 quantization scaling factor of INT4 quantization, and channel-wise
 scaling to compensate for INT4’s coarse granularity. In attention layers, we address
 quantization challenges posed by rotary positional embeddings (RoPE) by combin-
 ing pre-RoPE and post-RoPE scaling strategies.  
-
+ (paper: https://arxiv.org/abs/2505.20839 )
 
 
 ## Requirements & Installation
@@ -202,3 +202,10 @@ kv_cache = PseudoQuantStaticCache(nbits=4,
 output = model.generate(**cuda_inps, past_key_values=kv_cache, max_new_tokens=256)
 
 ```
+
+
+##
+
+https://arxiv.org/abs/2505.20839
+
+
