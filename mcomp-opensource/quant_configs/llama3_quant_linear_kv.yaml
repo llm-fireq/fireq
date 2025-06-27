@@ -1,0 +1,70 @@
+layer_quant_configs:
+  - index: 0
+    type: attn
+    #pristine: true
+    qdtype:
+      - names:
+        - q_proj
+        - k_proj
+        - v_proj
+        - o_proj
+        types: I4_I8
+    adds:
+      - mapping_index: 0
+        smoothed:
+          method: auto
+      - mapping_index: 1
+        smoothed:
+          method: auto
+        rotated:
+          method: auto
+        reordered:
+          method: auto
+    rope:
+      type: post
+  - index: 1
+    type: mlp
+    #pristine: true
+    qdtype:
+      - names:
+        - up_proj
+        - gate_proj
+        - down_proj
+        types: I4_I8
+    adds:
+      - mapping_index: 2
+        smoothed:
+          method: auto
+      - mapping_index: 3
+        smoothed:
+          method: auto
+        rotated:
+          method: auto
+      - mapping_index: 4
+        reordered:
+          method: auto
+quant:
+  strategy: blockwise # [ blockwise, layerwise, alteranted ]
+  init_orthogonal_transform: false
+  awq_smoothing: false
+  kv_quant: true
+  kv_n_bits: 4
+  kv_group_size: 128
+  kv_scale_dtype: 'bf16'
+  w_group_size: 128
+  quant_block_list:
+    - quant_block_index: 0
+      attn_index: 0
+      mlp_index: 1
+model_quant_mapping:
+  - quant_block_index: 0
+    mapping_layers:
+    - all
+calib_data:
+  name: 'mit-han-lab/pile-val-backup'
+  #subset_name: 'wikitext-2-raw-v1'
+  split: 'validation'
+  text_column: 'text'
+  batch: 10
+  seq_len: 2048
+  

@@ -1,0 +1,100 @@
+model_type:
+  layer_types:
+  - type: attn
+    name: self_attn
+    pre_ln: true
+    ln_name: input_layernorm
+    proj_in:
+      - q_proj
+      - k_proj
+      - v_proj
+    proj_out:
+      - o_proj
+  - type: mlp
+    name: mlp
+    pre_ln: true
+    ln_name: post_attention_layernorm
+    proj_in:
+      - gate_proj
+      - up_proj
+    proj_out:
+      - down_proj
+  model_norm_name: norm
+  model_norm_pos: last # first/last
+  embed_name: embed_tokens
+  head_name: lm_head
+adds_mappings:
+  - index: 0
+    block: attn
+    alias: qkv_in
+    names:
+    - k_proj
+    - q_proj
+    - v_proj
+    orientation: 2
+    matching_names:
+    - input_layernorm
+    matching_orientation: 1
+    not_allowed:
+    - reordered
+    - rotated
+  - index: 1
+    block: attn
+    alias: v_o
+    names:
+    - v_proj
+    orientation: 1
+    matching_names:
+    - o_proj
+    matching_orientation: 2
+  - index: 2
+    block: mlp
+    alias: up_gate_in
+    names:
+    - up_proj
+    - gate_proj
+    orientation: 2
+    matching_names:
+    - post_attention_layernorm
+    matching_orientation: 1
+    not_allowed:
+    - reordered
+    - rotated
+  - index: 3
+    block: mlp
+    alias: up_down
+    names: 
+    - down_proj
+    orientation: 2
+    matching_names:
+    - up_proj
+    matching_orientation: 1
+    not_allowed:
+    - reordered
+    - rotated
+  - index: 4
+    block: mlp
+    alias: up_gate_down
+    names: 
+    - down_proj
+    orientation: 2
+    matching_names:
+    - up_proj
+    - gate_proj    
+    matching_orientation: 1
+    not_allowed:
+    - smoothed
+    - rotated
+  - index: 5
+    block: attn
+    alias: q_k
+    names:
+    - q_proj
+    orientation: 1
+    matching_names:
+    - k_proj
+    matching_orientation: 1
+    not_allowed:
+    - rotated
+    
+    

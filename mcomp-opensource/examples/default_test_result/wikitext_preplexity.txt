@@ -1,0 +1,1 @@
+* topk: 3 | pre-RoPE: 1.0 | post-RoPE: 1.0 | vmul: 1.0 | qkv: 0.0 | o: 0.0 | up & gate: 0.0 | down: 0.0 | PPL: 14.646714183505157 

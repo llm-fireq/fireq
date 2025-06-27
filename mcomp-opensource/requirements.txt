@@ -1,0 +1,9 @@
+transformers==4.51.3
+triton==3.2.0
+# torch==2.6.0+cu126
+# MarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1733219680183/work
+safetensors==0.5.3
+datasets==3.5.1
+nvidia-ml-py3==7.352.0
+
+lm_eval==0.4.8
